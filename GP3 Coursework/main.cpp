@@ -146,7 +146,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	LPCSTR gameFonts[3] = { "Fonts/digital-7.ttf", "Fonts/space age.ttf", "Fonts/doctor_who.ttf" };
 
 	theFontMgr->addFont("SevenSeg", gameFonts[0], 24);
-	theFontMgr->addFont("Space", gameFonts[1], 24);
+	theFontMgr->addFont("Space", gameFonts[1], 12);
 	theFontMgr->addFont("DrWho", gameFonts[2], 48);
 
 	// Load Sound						-Find a suitable theme-
@@ -249,7 +249,18 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	float tCount = 0.0f;
 	string outputMsg;
 
-	//theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
+	theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
+	
+	/*
+	if (thePlayer.soundToggle == false)
+	{
+	theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
+	}
+	if (thePlayer.soundToggle == true)
+	{
+		theSoundMgr->getSnd("Theme")->stopAudio();
+	}*/
+
 
 	std::vector<cLaser*> laserList;
 	std::vector<cLaser*>::iterator index;
@@ -291,19 +302,20 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glLoadIdentity();
 		glLoadMatrixf((GLfloat*)&theCamera.getTheViewMatrix());
 
+		//thePlayer.soundToggle = true;
 
-		/*if (m_InputMgr->isKeyDown('c'))
-		{
-			cameraSwitch = true;
-		}
-
-		if (m_InputMgr->isKeyDown('v'))
-		{
-			cameraSwitch = false;
-		}*/
 
 		//outputMsg = to_string(theEnemy.size()); // convert float to string
+
+		if (thePlayer.soundToggle == false)
+		{
+			theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
+		}
+		if (thePlayer.soundToggle == true)
+		{
+			theSoundMgr->getSnd("Theme")->stopAudio();
 		
+		}
 		if (thePlayer.cameraSwitch == true)
 		{
 			outputMsg = to_string(thePlayer.cameraSwitch);
@@ -319,6 +331,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		theCamera.setTheCameraLookAt(glm::vec3(thePlayer.getPosition().x, thePlayer.getPosition().y, 0.0f));
 		theCamera.update();
 		}
+		//Code before camera switch
 		/*
 		theCamera.setTheCameraPos(glm::vec3(thePlayer.getPosition().x, thePlayer.getPosition().y, 3.0f + thePlayer.getPosition().z));
 		theCamera.setTheCameraLookAt(glm::vec3(thePlayer.getPosition().x, thePlayer.getPosition().y, 0.0f));
@@ -351,14 +364,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glPopMatrix();
 		glPopMatrix();
 		
-		for (vector<cEnemy*>::iterator enemyIterator = theEnemy.begin(); enemyIterator != theEnemy.end(); ++enemyIterator)
+		/*for (vector<cEnemy*>::iterator enemyIterator = theEnemy.begin(); enemyIterator != theEnemy.end(); ++enemyIterator)
 		{
 			if ((*enemyIterator)->isActive())
 			{
 				spaceShipMdl.renderMdl((*enemyIterator)->getPosition(), (*enemyIterator)->getRotation(), (*enemyIterator)->getScale());
 				(*enemyIterator)->update(elapsedTime);
 			}
-		}
+		}*/
 
 		//Model Rendering
 		spaceShipMdl.renderMdl(thePlayer.getPosition(), thePlayer.getRotation(), thePlayer.getScale());
@@ -383,9 +396,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glPushMatrix();
 		theOGLWnd.setOrtho2D(windowWidth, windowHeight);
 		theFontMgr->getFont("DrWho")->printText("Space Game", FTPoint(10, 35, 0.0f), colour3f(0.0f, 255.0f, 0.0f));
-		theFontMgr->getFont("Space")->printText(outputMsg.c_str(), FTPoint(850, 35, 0.0f), colour3f(255.0f, 255.0f, 255.0f)); // uses c_str to convert string to LPCSTR
+		theFontMgr->getFont("Space")->printText("C & V = camera", FTPoint(850, 35, 0.0f), colour3f(255.0f, 255.0f, 255.0f)); // uses c_str to convert string to LPCSTR
+		theFontMgr->getFont("Space")->printText("E & R = Sound ON/OFF", FTPoint(850, 45, 0.0f), colour3f(255.0f, 255.0f, 255.0f));
 		glPopMatrix();
 
+		
 		pgmWNDMgr->swapBuffers();
 
 		tCount += elapsedTime;

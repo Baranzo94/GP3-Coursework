@@ -34,14 +34,24 @@ void cPlayer::update(float elapsedTime)
 		//Original was for Z same as ^^^
 	}
 
-	if (m_InputMgr->isKeyDown(67))
+	if (m_InputMgr->isKeyDown(67)) // C Key
 	{
 		cameraSwitch = true;
 	}
 
-	if (m_InputMgr->isKeyDown(86))
+	if (m_InputMgr->isKeyDown(86)) // V Key
 	{
 		cameraSwitch = false;
+	}
+
+	if (m_InputMgr->isKeyDown(69)) // E key
+	{
+		soundToggle = true;
+	}
+
+	if (m_InputMgr->isKeyDown(82)) // R key
+	{
+		soundToggle = false;
 	}
 
 	if (m_InputMgr->isKeyDown(VK_SPACE))

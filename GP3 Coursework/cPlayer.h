@@ -17,6 +17,7 @@ public:
 	void attachInputMgr(cInputMgr* inputMgr);
 	virtual void update(float elapsedTime);
 	bool cameraSwitch;
+	bool soundToggle;
 
 	~cPlayer();
 };
