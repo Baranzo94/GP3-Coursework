@@ -16,22 +16,20 @@ void cPlayer::update(float elapsedTime)
 	if (m_InputMgr->isKeyDown(VK_RIGHT))
 	{
 		rotationAngle += 1.0f;
-		//original = 5 and for ---/
-		//translationX -= 1.0f;
 	}
 	if (m_InputMgr->isKeyDown(VK_LEFT))
 	{
 		rotationAngle -= 1.0f;
-		//translationX += 1.0f;
 	}
 	if (m_InputMgr->isKeyDown(VK_UP))
 	{
 		translationZ += 1.0f;
+		m_SoundMgr->getSnd("Engine")->playAudio(AL_TRUE);
 	}
 	if (m_InputMgr->isKeyDown(VK_DOWN))
 	{
 		translationZ -= 1.0f;
-		//Original was for Z same as ^^^
+		m_SoundMgr->getSnd("Engine")->playAudio(AL_TRUE);
 	}
 
 	if (m_InputMgr->isKeyDown(67)) // C Key
@@ -63,16 +61,19 @@ void cPlayer::update(float elapsedTime)
 		mdlLaserDirection *= -1;
 
 		// Add new bullet sprite to the vector array
-		theTardisLasers.push_back(new cLaser);
-		int numLasers = theTardisLasers.size() - 1;
-		theTardisLasers[numLasers]->setDirection(mdlLaserDirection);
-		theTardisLasers[numLasers]->setRotation(0.0f);
-		theTardisLasers[numLasers]->setScale(glm::vec3(1, 1, 1));
-		theTardisLasers[numLasers]->setSpeed(5.0f);
-		theTardisLasers[numLasers]->setPosition(this->getPosition() + mdlLaserDirection);
-		theTardisLasers[numLasers]->setIsActive(true);
-		//theTardisLasers[numLasers]->setMdlDimensions(theLaser.getModelDimensions());
-		theTardisLasers[numLasers]->update(elapsedTime);
+		theLasers.push_back(new cLaser);
+		int numLasers = theLasers.size() - 1;
+		theLasers[numLasers]->setDirection(mdlLaserDirection);
+		theLasers[numLasers]->setRotation(0.0f);
+		theLasers[numLasers]->setScale(glm::vec3(1, 1, 1));
+		theLasers[numLasers]->setSpeed(5.0f);
+		theLasers[numLasers]->setPosition(this->getPosition() + mdlLaserDirection);
+		theLasers[numLasers]->setIsActive(true);
+
+		//theLasers[numLasers]->setMdlDimensions(theLaser.getModelDimensions());
+
+		theLasers[numLasers]->update(elapsedTime);
+
 		// play the firing sound
 		m_SoundMgr->getSnd("Shot")->playAudio(AL_TRUE);
 	}
@@ -82,7 +83,7 @@ void cPlayer::update(float elapsedTime)
 	| Check for collisions
 	==============================================================
 	*/
-	for (vector<cLaser*>::iterator laserIterartor = theTardisLasers.begin(); laserIterartor != theTardisLasers.end(); ++laserIterartor)
+	for (vector<cLaser*>::iterator laserIterartor = theLasers.begin(); laserIterartor != theLasers.end(); ++laserIterartor)
 	{
 		(*laserIterartor)->update(elapsedTime);
 		for (vector<cEnemy*>::iterator enemyIterator = theEnemy.begin(); enemyIterator != theEnemy.end(); ++enemyIterator)
@@ -98,12 +99,12 @@ void cPlayer::update(float elapsedTime)
 		}
 	}
 
-	vector<cLaser*>::iterator laserIterartor = theTardisLasers.begin();
-	while (laserIterartor != theTardisLasers.end())
+	vector<cLaser*>::iterator laserIterartor = theLasers.begin();
+	while (laserIterartor != theLasers.end())
 	{
 		if ((*laserIterartor)->isActive() == false)
 		{
-			laserIterartor = theTardisLasers.erase(laserIterartor);
+			laserIterartor = theLasers.erase(laserIterartor);
 		}
 		else
 		{
@@ -132,7 +133,7 @@ void cPlayer::update(float elapsedTime)
 
 	m_mdlRotation -= rotationAngle;
 
-	//mdlVelocityAdd *= translationX;
+
 	mdlVelocityAdd *= translationZ;
 
 	m_mdlDirection += mdlVelocityAdd;
@@ -141,7 +142,7 @@ void cPlayer::update(float elapsedTime)
 	m_mdlDirection *= 0.95f;
 
 	rotationAngle = 0;
-	//translationX = 0;
+
 	translationZ = 0;
 }
 

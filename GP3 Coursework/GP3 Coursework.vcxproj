@@ -37,7 +37,7 @@
     <ClCompile Include="cWNDManager.cpp" />
     <ClCompile Include="GameConstants.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="tardisWarsGame.cpp" />
+    <ClCompile Include="spaceGame.cpp" />
     <ClCompile Include="windowOGL.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +66,7 @@
     <ClInclude Include="cTriangle.h" />
     <ClInclude Include="cWNDManager.h" />
     <ClInclude Include="GameConstants.h" />
-    <ClInclude Include="tardisWarsGame.h" />
+    <ClInclude Include="spaceGame.h" />
     <ClInclude Include="wglext.h" />
     <ClInclude Include="windowOGL.h" />
   </ItemGroup>
@@ -79,6 +79,9 @@
     <Library Include="ILU.lib" />
     <Library Include="ILUT.lib" />
     <Library Include="OpenAL32.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB36C160-FCC6-4137-8720-FB0A2B770F8E}</ProjectGuid>

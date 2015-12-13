@@ -93,10 +93,10 @@
     <ClCompile Include="cPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tardisWarsGame.cpp">
+    <ClCompile Include="cSkyboxTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cSkyboxTexture.cpp">
+    <ClCompile Include="spaceGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,10 +179,10 @@
     <ClInclude Include="cPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tardisWarsGame.h">
+    <ClInclude Include="cSkyboxTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cSkyboxTexture.h">
+    <ClInclude Include="spaceGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -195,5 +195,8 @@
     <Library Include="ILU.lib" />
     <Library Include="ILUT.lib" />
     <Library Include="OpenAL32.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
