@@ -256,6 +256,13 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	std::vector<cLaser*> laserList;
 	std::vector<cLaser*>::iterator index;
 
+	//Declaration of Variables for Fog
+	bool gp;
+	GLuint filter;
+	GLuint fogMode[] = { GL_EXP, GL_EXP2, GL_LINEAR };
+	GLuint fogfilter = 0;
+	GLfloat fogcolour[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+
 
 	//This is the mainloop, we render frames until isRunning returns false
 	while (pgmWNDMgr->isWNDRunning())
@@ -274,42 +281,33 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glLoadIdentity();
 		glLoadMatrixf((GLfloat*)&theCamera.getTheViewMatrix());
 
-		//thePlayer.soundToggle = true;
-
-		//Declaration of Variables for Fog
-
-		/*bool gp; 
-		GLuint filter;
-		GLuint fogMode[] = { GL_EXP, GL_EXP2, GL_LINEAR };
-		GLuint fogfilter = 0;
-		GLfloat fogcolour[4] = { 0.5f, 0.5f, 0.5f, 1.0f };		
-	
 		//Fog Code
-
-		glClearColor(0.5f, 0.0f, 0.5f, 1.0f);
+		
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glFogi(GL_FOG_MODE, fogMode[fogfilter]);
 		glFogfv(GL_FOG_COLOR, fogcolour);
-		glFogf(GL_FOG_DENSITY, 0.35f);
+		glFogf(GL_FOG_DENSITY, 0.05f);
 		glHint(GL_FOG_HINT, GL_DONT_CARE);
-		glFogf(GL_FOG_START, 1.0f);
-		glFogf(GL_FOG_END, 5.0f);
+		glFogf(GL_FOG_START, 0.05f);
+		glFogf(GL_FOG_END, 1.0f);
 		
 		//Enable Fog
 
 		glEnable(GL_FOG);
-		*/
+		
 
 		//outputMsg = to_string(theEnemy.size()); // convert float to string
 
-		/*if (thePlayer.soundToggle == false)
+		//This allows the toggling of the main theme playing ON/OFF
+		if (thePlayer.soundToggle == false)
 		{
-			theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
+			//theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
 		}
 		if (thePlayer.soundToggle == true)
 		{
 			theSoundMgr->getSnd("Theme")->stopAudio();
 		
-		}*/
+		}
 
 		// Code that switches between the player 3rd person view and set view 
 		if (thePlayer.cameraSwitch == true)

@@ -1,3 +1,4 @@
+
 /*
 =====================
 cSkybox.h
@@ -15,7 +16,7 @@ cSkybox.h
 #include "cShapes.h"
 #include <vector>
 
-class skyboxMaterial 
+class skyboxMaterial
 {
 public:
 	skyboxMaterial();

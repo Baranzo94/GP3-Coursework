@@ -24,14 +24,17 @@ void cPlayer::update(float elapsedTime)
 	if (m_InputMgr->isKeyDown(VK_UP))
 	{
 		translationZ += 1.0f;
+		// Play the engine sound when moving
 		m_SoundMgr->getSnd("Engine")->playAudio(AL_TRUE);
 	}
 	if (m_InputMgr->isKeyDown(VK_DOWN))
 	{
 		translationZ -= 1.0f;
+		// Play the engine sound when moving
 		m_SoundMgr->getSnd("Engine")->playAudio(AL_TRUE);
 	}
 
+	//Keys to capture to allow camera switching
 	if (m_InputMgr->isKeyDown(67)) // C Key
 	{
 		cameraSwitch = true;
@@ -42,6 +45,7 @@ void cPlayer::update(float elapsedTime)
 		cameraSwitch = false;
 	}
 
+	//Keys to capture the sound switching
 	if (m_InputMgr->isKeyDown(69)) // E key
 	{
 		soundToggle = true;
@@ -52,6 +56,7 @@ void cPlayer::update(float elapsedTime)
 		soundToggle = false;
 	}
 
+	//Fire the laser
 	if (m_InputMgr->isKeyDown(VK_SPACE))
 	{
 		glm::vec3 mdlLaserDirection;
