@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cColours.cpp" />
-    <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cFont.cpp" />
     <ClCompile Include="cFontMgr.cpp" />
@@ -24,10 +23,7 @@
     <ClCompile Include="cModel.cpp" />
     <ClCompile Include="cModelLoader.cpp" />
     <ClCompile Include="cPlayer.cpp" />
-    <ClCompile Include="cPyramid.cpp" />
     <ClCompile Include="cShapes.cpp" />
-    <ClCompile Include="cSkybox.cpp" />
-    <ClCompile Include="cSkyboxTexture.cpp" />
     <ClCompile Include="cSound.cpp" />
     <ClCompile Include="cSoundMgr.cpp" />
     <ClCompile Include="cSphere.cpp" />
@@ -43,7 +39,6 @@
   <ItemGroup>
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cColours.h" />
-    <ClInclude Include="cCube.h" />
     <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cFont.h" />
     <ClInclude Include="cFontMgr.h" />
@@ -54,10 +49,7 @@
     <ClInclude Include="cModel.h" />
     <ClInclude Include="cModelLoader.h" />
     <ClInclude Include="cPlayer.h" />
-    <ClInclude Include="cPyramid.h" />
     <ClInclude Include="cShapes.h" />
-    <ClInclude Include="cSkybox.h" />
-    <ClInclude Include="cSkyboxTexture.h" />
     <ClInclude Include="cSound.h" />
     <ClInclude Include="cSoundMgr.h" />
     <ClInclude Include="cSphere.h" />
@@ -82,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB36C160-FCC6-4137-8720-FB0A2B770F8E}</ProjectGuid>

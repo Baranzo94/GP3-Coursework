@@ -9,8 +9,6 @@
 #include "cWNDManager.h"
 #include "cColours.h"
 #include "cShapes.h"
-#include "cPyramid.h"
-#include "cCube.h"
 #include "cSphere.h"
 #include "cMaterial.h"
 #include "cLight.h"
@@ -192,6 +190,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		theEnemy[loop]->setMdlDimensions(spaceShipMdl.getModelDimensions());
 		theEnemy[loop]->setScale(glm::vec3(5, 5, 5));
 	}*/
+
 	// Player initizlation, the two managers (Input and Sound) are attached to allow key inputs to control the player, sound associated with player.
 	cPlayer thePlayer;
 	thePlayer.initialise(glm::vec3(1, 0, 70), 90.0f, glm::vec3(0.002, 0.002, 0.002), glm::vec3(0, 0,0), 1.0f, true);
@@ -240,24 +239,12 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	// Starts the theme music and plays it in a loop
 	theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
-	
-	//Sound toggle code that switches main theme on and off
-	/*
-	if (thePlayer.soundToggle == false)
-	{
-	theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
-	}
-	if (thePlayer.soundToggle == true)
-	{
-		theSoundMgr->getSnd("Theme")->stopAudio();
-	}*/
 
 	// List and index for the lasers fired from player is declared here
 	std::vector<cLaser*> laserList;
 	std::vector<cLaser*>::iterator index;
 
 	//Declaration of Variables for Fog
-	bool gp;
 	GLuint filter;
 	GLuint fogMode[] = { GL_EXP, GL_EXP2, GL_LINEAR };
 	GLuint fogfilter = 0;
@@ -288,15 +275,12 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glFogfv(GL_FOG_COLOR, fogcolour);
 		glFogf(GL_FOG_DENSITY, 0.05f);
 		glHint(GL_FOG_HINT, GL_DONT_CARE);
-		glFogf(GL_FOG_START, 0.05f);
-		glFogf(GL_FOG_END, 1.0f);
+		glFogf(GL_FOG_START, 1.0f);
+		glFogf(GL_FOG_END, 5.0f);
 		
 		//Enable Fog
 
 		glEnable(GL_FOG);
-		
-
-		//outputMsg = to_string(theEnemy.size()); // convert float to string
 
 		//This allows the toggling of the main theme playing ON/OFF
 		if (thePlayer.soundToggle == false)
@@ -314,7 +298,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		{
 			// Set view
 			outputMsg = to_string(thePlayer.cameraSwitch);
-			theCamera.setTheCameraPos(glm::vec3(1.0f, 3.0f, 70.0f));
+			theCamera.setTheCameraPos(glm::vec3(10.0f, 3.0f, 70.0f));
 			theCamera.setTheCameraLookAt(glm::vec3(0.0f, 0.0f, 0.0f));
 			theCamera.update();
 		}
@@ -357,14 +341,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glPopMatrix();
 		glPopMatrix();
 		
-		/*for (vector<cEnemy*>::iterator enemyIterator = theEnemy.begin(); enemyIterator != theEnemy.end(); ++enemyIterator)
+		for (vector<cEnemy*>::iterator enemyIterator = theEnemy.begin(); enemyIterator != theEnemy.end(); ++enemyIterator)
 		{
 			if ((*enemyIterator)->isActive())
 			{
 				spaceShipMdl.renderMdl((*enemyIterator)->getPosition(), (*enemyIterator)->getRotation(), (*enemyIterator)->getScale());
 				(*enemyIterator)->update(elapsedTime);
 			}
-		}*/
+		}
 
 		//Model Rendering for the spacegates, player fighter, satellite and station.
 		spaceShipMdl.renderMdl(thePlayer.getPosition(), thePlayer.getRotation(), thePlayer.getScale());
