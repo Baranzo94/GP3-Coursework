@@ -190,7 +190,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		theEnemy[loop]->setMdlDimensions(spaceShipMdl.getModelDimensions());
 		theEnemy[loop]->setScale(glm::vec3(5, 5, 5));
 	}*/
-
 	// Player initizlation, the two managers (Input and Sound) are attached to allow key inputs to control the player, sound associated with player.
 	cPlayer thePlayer;
 	thePlayer.initialise(glm::vec3(1, 0, 70), 90.0f, glm::vec3(0.002, 0.002, 0.002), glm::vec3(0, 0,0), 1.0f, true);
@@ -283,11 +282,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glEnable(GL_FOG);
 
 		//This allows the toggling of the main theme playing ON/OFF
-		if (thePlayer.soundToggle == false)
+		if (theInputMgr->isKeyDown(69) && thePlayer.soundToggle == false)
 		{
-			//theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
+			theSoundMgr->getSnd("Theme")->playAudio(AL_LOOPING);
 		}
-		if (thePlayer.soundToggle == true)
+		if (theInputMgr->isKeyDown(82) && thePlayer.soundToggle == true)
 		{
 			theSoundMgr->getSnd("Theme")->stopAudio();
 		
@@ -302,6 +301,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 			theCamera.setTheCameraLookAt(glm::vec3(0.0f, 0.0f, 0.0f));
 			theCamera.update();
 		}
+
+
 
 		if (thePlayer.cameraSwitch == false)
 		{
@@ -349,7 +350,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 				(*enemyIterator)->update(elapsedTime);
 			}
 		}
-
+		
 		//Model Rendering for the spacegates, player fighter, satellite and station.
 		spaceShipMdl.renderMdl(thePlayer.getPosition(), thePlayer.getRotation(), thePlayer.getScale());
 		spaceGateMdl.renderMdl(gate.getPosition(), gate.getRotation(), gate.getScale());

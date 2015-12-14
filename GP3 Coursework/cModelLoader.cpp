@@ -41,16 +41,12 @@ void cModelLoader::renderMdl(glm::vec3 mdlPosition, float mdlRotationAngle, glm:
 {
 	glPushMatrix();
 	//transformations here...
-	//glTranslatef(mdlPosition.x, 0.0f, -mdlPosition.z);
+
 	glTranslatef(mdlPosition.x, -mdlPosition.y, mdlPosition.z);
 
 	// Rotation of models is here !!! for X-Axis
 
 	glRotatef(mdlRotationAngle, 0, 1, 0);
-	// (-1.5,2,1)
-	
-	//glRotatef(mdlRotationAngleX, 0, 0.1, 0);
-	
 
 	glScalef(mdlScale.x, mdlScale.y, mdlScale.z);
 	glmDraw(m_model, GLM_TEXTURE | GLM_MATERIAL);  // GLM_SMOOTH | GLM_TEXTURE | GLM_MATERIAL
