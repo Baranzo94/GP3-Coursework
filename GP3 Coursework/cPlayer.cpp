@@ -117,19 +117,6 @@ void cPlayer::update(float elapsedTime)
 		}
 	}
 
-	vector<cEnemy*>::iterator enemyIterartor = theEnemy.begin();
-	while (enemyIterartor != theEnemy.end())
-	{
-		if ((*enemyIterartor)->isActive() == false)
-		{
-			enemyIterartor = theEnemy.erase(enemyIterartor);
-		}
-		else
-		{
-			++enemyIterartor;
-		}
-	}
-
 	// Find out what direction we should be thrusting, using rotation.
 	glm::vec3 mdlVelocityAdd;
 	mdlVelocityAdd.x = -(float)glm::sin(glm::radians(m_mdlRotation));  // Remember to adjust for radians

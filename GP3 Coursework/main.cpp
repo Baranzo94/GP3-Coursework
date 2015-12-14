@@ -35,10 +35,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	const int windowHeight = 768;
 	const int windowBPP = 16;
 
-	//Make a variable like intitialModelRotation
-
-	
-
 	//This is our window
 	static cWNDManager* pgmWNDMgr = cWNDManager::getInstance();
 
@@ -91,7 +87,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	spaceStationTexture.createTexture("Models/SpaceStation/mat_stat.png");
 	cTexture spaceSatelliteTexture;
 	spaceSatelliteTexture.createTexture("Models/SpaceSatellite/mat_sate.png");
-
 
 	cTexture laserTexture;
 	laserTexture.createTexture("Models/laser.tga");
@@ -183,18 +178,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	cModelLoader theLaser;
 	theLaser.loadModel("Models/laser.obj", laserTexture);
 
-	/*for (int loop = 0; loop < 5; loop++)
-	{
-		theEnemy.push_back(new cEnemy);
-		theEnemy[loop]->randomise();
-		theEnemy[loop]->setMdlDimensions(spaceShipMdl.getModelDimensions());
-		theEnemy[loop]->setScale(glm::vec3(5, 5, 5));
-	}*/
 	// Player initizlation, the two managers (Input and Sound) are attached to allow key inputs to control the player, sound associated with player.
 	cPlayer thePlayer;
 	thePlayer.initialise(glm::vec3(1, 0, 70), 90.0f, glm::vec3(0.002, 0.002, 0.002), glm::vec3(0, 0,0), 1.0f, true);
-	//thePlayer.setRotation(mdlRotation.x = 5);
-	//thePlayer.setMdlDimensions(tardisMdl.getModelDimensions());
+
 	thePlayer.setMdlDimensions(spaceShipMdl.getModelDimensions());
 	thePlayer.attachInputMgr(theInputMgr);
 	thePlayer.attachSoundMgr(theSoundMgr);
@@ -273,7 +260,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glFogi(GL_FOG_MODE, fogMode[fogfilter]);
 		glFogfv(GL_FOG_COLOR, fogcolour);
 		glFogf(GL_FOG_DENSITY, 0.05f);
-		glHint(GL_FOG_HINT, GL_DONT_CARE);
 		glFogf(GL_FOG_START, 1.0f);
 		glFogf(GL_FOG_END, 5.0f);
 		
@@ -301,8 +287,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 			theCamera.setTheCameraLookAt(glm::vec3(0.0f, 0.0f, 0.0f));
 			theCamera.update();
 		}
-
-
 
 		if (thePlayer.cameraSwitch == false)
 		{
@@ -341,16 +325,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		glPopMatrix();
 		glPopMatrix();
 		glPopMatrix();
-		
-		for (vector<cEnemy*>::iterator enemyIterator = theEnemy.begin(); enemyIterator != theEnemy.end(); ++enemyIterator)
-		{
-			if ((*enemyIterator)->isActive())
-			{
-				spaceShipMdl.renderMdl((*enemyIterator)->getPosition(), (*enemyIterator)->getRotation(), (*enemyIterator)->getScale());
-				(*enemyIterator)->update(elapsedTime);
-			}
-		}
-		
+
 		//Model Rendering for the spacegates, player fighter, satellite and station.
 		spaceShipMdl.renderMdl(thePlayer.getPosition(), thePlayer.getRotation(), thePlayer.getScale());
 		spaceGateMdl.renderMdl(gate.getPosition(), gate.getRotation(), gate.getScale());
@@ -360,7 +335,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		spaceSatellite.renderMdl(satellite.getPosition(), satellite.getRotation(), satellite.getScale());
 
 		thePlayer.update(elapsedTime);
-
+	//Iterator that creates multiple laser projectiles as the player presses the fire laser key
 		for (vector<cLaser*>::iterator laserIterartor = theLasers.begin(); laserIterartor != theLasers.end(); ++laserIterartor)
 		{
 			if ((*laserIterartor)->isActive())
@@ -369,7 +344,6 @@ int WINAPI WinMain(HINSTANCE hInstance,
 				(*laserIterartor)->update(elapsedTime);
 			}
 		}
-		//outputMsg = to_string(theEnemy.size()); // convert float to string
 
 		glPushMatrix();
 		theOGLWnd.setOrtho2D(windowWidth, windowHeight);
